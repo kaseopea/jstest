@@ -65,14 +65,14 @@ console.log("Last element: " + noiseArray[noiseArray.length-1]);
 var animals = [];
 animals.push(animal);
 
-var quackers = { username: 'DaffyDuck', tagline: 'Yippeee!', noises: noiseArray };
+var quackers = { username: 'Duck', tagline: 'Yippeee!', noises: noiseArray };
 var dog = {
-    username: 'FFuck',
+    username: 'FDog',
     tagline: 'Yippeee!',
     noises: noiseArray
 };
 var bee = {};
-bee.username = 'DPIS';
+bee.username = 'DBee';
 bee.tagline = 'Yippeee!';
 bee.noises = noiseArray;
 
@@ -111,9 +111,9 @@ var AnimalCreator = function(username, species, tagline,noises) {
 };
 
 var sheep = AnimalCreator('Cloud', 'sheep', 'You can count on me!', ['baahhh', 'arrgg', 'chewchewchew']);
-
 var cow = AnimalCreator('Moo', 'cow', 'Moo!Moo!Moo!', ['bacccc', 'gg', 'chewchewchew']);
 var llama = AnimalCreator('Zeny', 'llama', 'It\'s wheeps!', ['baalll', 'rr', 'bahbahbah']);
+
 var addFriend = function(animalObj, friendObj) {
     //return animalObj.friends.push(friendObj);
     return animalObj.friends.push(friendObj.username);
@@ -144,3 +144,22 @@ var giveMatches = function(arr) {
 
 giveMatches(myFarm);
 console.log(myFarm);
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+titler('Code 4. Nesting');
+
+var friends = [];
+friends.push(animals[2].username, animals[3].username);
+console.log(friends);
+
+var relationships = {};
+relationships.friends = friends;
+
+var matches = [];
+relationships.matches = matches;
+
+relationships.matches.push(myFarm[0].username);
+
+console.log(animals);
+console.log(relationships);

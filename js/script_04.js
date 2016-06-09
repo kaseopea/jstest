@@ -19,7 +19,7 @@ var palindromeOrNot = function(string) {
     } else {
         return false;
     };
-}
+};
 console.log(palindromeOrNot(test1));
 console.log(palindromeOrNot(test2));
 console.log(palindromeOrNot(test3));

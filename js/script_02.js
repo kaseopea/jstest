@@ -162,4 +162,7 @@ relationships.matches = matches;
 relationships.matches.push(myFarm[0].username);
 
 console.log(animals);
-console.log(relationships);
+for ( var i in animals) {
+    animals[i].relationships = relationships;
+}
+console.log(animals);

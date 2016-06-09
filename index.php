@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>js test page</title>
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
-    <script src="js/general.js"></script>
-    <?php if (isset($_GET['s'])) { ?>
-        <script src="js/<?php echo trim($_GET['s']); ?>.js"></script>
-    <?php } ?>
+    <link rel="stylesheet" href="css/style.css">
+    <?php
+        include('lib/mocha_head.php');
+        include('lib/chai.php');
+    ?>
 
     <style>
         body { padding: 3em 5em;}
@@ -25,5 +26,12 @@ if ($handle = opendir('js')) {
     <li><a href="index.php?s=<?php echo $file[0];?>"><?php echo $entry;?></a></li>
 <? }} closedir($handle);} ?>
 </ul>
+
+<script src="js/general.js"></script>
+<?php if (isset($_GET['s'])) { ?>
+    <script src="js/<?php echo trim($_GET['s']); ?>.js"></script>
+<?php } ?>
+<?php include('lib/mocha_bottom.php'); ?>
+
 </body>
 </html>

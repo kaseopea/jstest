@@ -1,6 +1,83 @@
 /*
  Решение задачек по ссылке http://www.w3resource.com/javascript-exercises/javascript-functions-exercises.php
  */
+////////////////////////////////////////////////////////////////////////////////////////////////////
+titler('Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.');
+
+var vowelsCount = function(string) {
+    var vowel_list = 'aeiouAEIOU';
+    var vcount = 0;
+    var str = string.toLowerCase().replace(/[^a-zA-Z0-9]+/g,'');
+    //console.log("Original string: " + string.length);
+    //console.log("Optimized string: " + str.length);
+
+    for ( var i = 0; i < str.length; i++ ) {
+        if ( vowel_list.indexOf(str[i]) != -1) vcount++;
+    };
+
+    return vcount;
+
+}
+console.log(vowelsCount('The quick brown fox'));
+console.log(vowelsCount('Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string'));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+titler('Write a JavaScript function that accepts a string as a parameter and find the longest word within the string.');
+
+var test1 = 'Write a JavaScript function that accepts a string as a parameter_in_my_mind and find the longest word within the string';
+var test2 = 'Web Development Tutorial';
+
+var maxWordLength = function (string) {
+    //Строку нужно регуляркой обработать, чтобы оставить только буквы и пробелы
+    var longest = '';
+    var words = string.split(' ');
+    for (var i = 0; i < words.length; i++) {
+        if (words[i].length > longest.length) longest = words[i]
+    };
+
+    return longest;
+}
+console.log(maxWordLength(test1));
+console.log(maxWordLength(test2));
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+titler('Write a JavaScript function that accepts a string as a parameter and converts the first letter of each word\n' +
+    'of the string in upper case. the quick brown fox - The Quick Brown Fox');
+
+String.prototype.replaceAt = function(index, character) {
+    return this.substr(0, index) + character + this.substr(index+character.length);
+}
+
+var capWords = function (string) {
+    var words = string.split(' ');
+    for (var i = 0; i < words.length; i++) {
+        var cap = words[i].charAt(0).toUpperCase();
+        words[i] = words[i].replaceAt(0, cap);
+    };
+
+    return words.join(' ');
+};
+
+console.log(capWords('the quick brown fox'));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+titler('Write a JavaScript function that returns a passed string with letters in alphabetical order.');
+
+var lettersSort = function (string) {
+    var letters = string.split('');
+    letters.sort();
+    return letters.join('');
+}
+
+console.log(lettersSort('webmaster'));
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+titler('Write a JavaScript function that generates all combinations of a string. dog - d,do,dog,o,og,g');
+
+console.log('Разобраться с примерами по ссылке http://www.w3resource.com/javascript-exercises/javascript-function-exercise-3.php')
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

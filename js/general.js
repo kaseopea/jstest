@@ -1,26 +1,20 @@
-/**
- * Created by vitalyrusov on 23.03.16.
- */
-function divider() {
-    console.log('******************************************************************************************************************************');
-}
-function titler(text) {
-    var words = text.split(' ');
-    var line = '';
-    var countW = 0;
-    var wordsPerLine = 20;
-    console.log("\n\n");
-    divider();
-    for ( var i = 0; i < words.length; i++) {
-        line += words[i].trim() + ' ';
-        if (words[i].trim() == '\n') countW = 0;
-        if (countW == wordsPerLine) {
-            line += '\n';
-            countW = 0;
+var Template = function() {
+    return {
+        title: function (title) {
+            this.divider();
+            console.log("[Task]");
+            console.log(title);
+            console.log('\n');
+            //this.divider();
+        },
+        divider: function () {
+
+            console.log('**************************************************************************');
+        },
+        end: function () {
+            console.log('__________________________________________________________________________');
+            console.log('\n\n');
         }
-        countW++;
     }
-    console.log("Task > ");
-    console.log(text);
-    divider();
-}
+};
+var page = Template();

@@ -39,9 +39,7 @@ var chargeCreditCard = function(num, price){
     console.log(price);
 };
 var once = function (func) {
-    var copyFunc = func;
     var executed = false;
-    //func();
     var exec = function (num,price) {
         if (!executed) {
             func(num,price);

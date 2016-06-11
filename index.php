@@ -27,6 +27,7 @@ if ($handle = opendir('js')) {
 <? }} closedir($handle);} ?>
 </ul>
 
+<script src="js/vendor/underscore-min.js"></script>
 <script src="js/general.js"></script>
 <?php if (isset($_GET['s'])) { ?>
     <script src="js/<?php echo trim($_GET['s']); ?>.js"></script>

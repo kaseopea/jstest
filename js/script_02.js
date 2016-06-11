@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Code 1. Алгоритм поиска простых чисел');
+page.title('Code 1. Алгоритм поиска простых чисел');
 
 var range_start = 2;
 var range_end = 10;
@@ -34,7 +34,7 @@ for ( i= range_start; i <= range_end; i++) {
     }
 }
 
-divider();
+page.divider();
 /*
 nextPrime:
     for (var i = 2; i <= 10; i++) {
@@ -47,7 +47,7 @@ nextPrime:
     }
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Code 2. Array Exercises');
+page.title('Code 2. Array Exercises');
 
 var animal =  { username: 'DaffyDuck', tagline: 'Yippeee!', noises: [] };
 
@@ -79,7 +79,7 @@ animals.push(dog, bee);
 //console.log(animals.length);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Code 3. eFarmony Functions');
+page.title('Code 3. eFarmony Functions');
 
 var AnimalTestUser = function (username) {
     var args = [];
@@ -144,7 +144,7 @@ console.log(myFarm);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Code 4. Nesting');
+page.title('Code 4. Nesting');
 
 var friends = [];
 friends.push(animals[2].username, animals[3].username);
@@ -166,7 +166,7 @@ console.log(animals);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Code 5. Scope');
+page.title('Code 5. Scope');
 var expect = chai.expect;
 it('a function has access to its own local scope variables',
     function () {
@@ -183,7 +183,7 @@ it('a function has access to its own local scope variables',
 /* Почитать подробнее про тесты, полезные знания. Mocha и Chai.*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Code 6. Closure');
+page.title('Code 6. Closure');
 
 var closureAlert = function() {
     var x = 0;
@@ -289,8 +289,8 @@ farmLoveStory.addWords('It was a friend face.');
 farmLoveStory.nextLine();
 farmLoveStory.addWords('It was a friend face. There was once a lovely cow.');
 farmLoveStory.addWords('It was a friend face.');
-divider();
+page.divider();
 farmLoveStory.tellStory();
-divider();
+page.divider();
 farmLoveStory.erase();
 farmLoveStory.tellStory();

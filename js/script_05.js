@@ -1,7 +1,7 @@
 /**
  * Created by vitalyrusov on 25.03.16.
  */
-titler('Считаем бобы');
+page.title('Считаем бобы');
 
 
 countMyChar('My father is a fucker in the circus', 'a');
@@ -16,4 +16,4 @@ function countMyChar(stroka, findchar) {
 	console.log(count);
 }
 
-divider();
+page.divider();

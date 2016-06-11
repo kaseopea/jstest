@@ -3,12 +3,12 @@
  */
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to get the website URL (loading page).');
+page.title('Write a JavaScript program to get the website URL (loading page).');
 console.log(document.URL);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to convert temperatures to and from celsius, fahrenheit.');
+page.title('Write a JavaScript program to convert temperatures to and from celsius, fahrenheit.');
 var c = 60;
 var f = 140;
 
@@ -25,7 +25,7 @@ console.log(cConverter(45));
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to calculate multiplication and division of two numbers (input from user).');
+page.title('Write a JavaScript program to calculate multiplication and division of two numbers (input from user).');
 document.write('<form>1st Number : <input type="text" id="firstNumber" value="12" /><br>2nd Number: <input type="text" id="secondNumber" value="6" /><br><input type="button" onClick="multiplyBy()" Value="Multiply" /><input type="button" onClick="divideBy()" Value="Divide" /></form><p>The Result is : <br> <span id = "result"></span></p>');
 
 var multiplyBy = function (num1,num2) {
@@ -47,7 +47,7 @@ var divideBy = function (num1, num2) {
 */
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to calculate days left until next Christmas.');
+page.title('Write a JavaScript program to calculate days left until next Christmas.');
 
 var oneday = 24*60*60*1000;
 var today = new Date();
@@ -58,7 +58,7 @@ console.log("Hey! " + daysleft + " days left for Christmas!");
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program where the program takes a random integer between 1 to 10, the user is then prompted\n' +
+ page.title('Write a JavaScript program where the program takes a random integer between 1 to 10, the user is then prompted\n' +
     'to input a guess number. If the user input matches with guess number, the program will display a message "Good Work"\n' +
     'otherwise display a message "Not matched". ');
 
@@ -73,7 +73,7 @@ alert(result);
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to find 1st January is being a Sunday between 2014 and 2050.');
+ page.title('Write a JavaScript program to find 1st January is being a Sunday between 2014 and 2050.');
 var date = new Date();
 var startY = 2016;
 var endY = 2030;
@@ -92,7 +92,7 @@ for (var year = startY; year <= endY; year++) {
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to determine whether a given year is a leap year in the Gregorian calendar.');
+ page.title('Write a JavaScript program to determine whether a given year is a leap year in the Gregorian calendar.');
 var date = new Date();
 //var curYear = date.getFullYear();
 //var yearPrompt = window.prompt('Input a year: ');
@@ -121,7 +121,7 @@ console.log(checkLeapYear(1900));
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to display the current day and time in the following format:\nToday is : Friday.\nCurrent time is : 4PM:50:22');
+ page.title('Write a JavaScript program to display the current day and time in the following format:\nToday is : Friday.\nCurrent time is : 4PM:50:22');
 
 var today = new Date();
 var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -147,13 +147,13 @@ setInterval(function() { formatAMPM();}, 1000);
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to print the contents of the current window.');
+page.title('Write a JavaScript program to print the contents of the current window.');
 console.log(window.print());
 */
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to get the current date.\nExpected Output: mm-dd-yyyy, mm/dd/yyyy or dd-mm-yyyy, dd/mm/yyyy');
+page.title('Write a JavaScript program to get the current date.\nExpected Output: mm-dd-yyyy, mm/dd/yyyy or dd-mm-yyyy, dd/mm/yyyy');
 var today = new Date();
 var dd = today.getDay();
 var mm = today.getMonth() + 1; //0..11
@@ -170,7 +170,7 @@ console.log(dd + '/' + mm + '/' + yyyy);
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to find the area of a triangle where lengths of the three of its sides are 5, 6, 7.');
+page.title('Write a JavaScript program to find the area of a triangle where lengths of the three of its sides are 5, 6, 7.');
 var a = 5;
 var b = 6;
 var c =7;
@@ -182,7 +182,7 @@ console.log("S: " + S.toFixed(2));
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript program to rotate the string \'w3resource\' in right direction by periodically removing\none letter from the end of the string and attaching it to the front.');
+page.title('Write a JavaScript program to rotate the string \'w3resource\' in right direction by periodically removing\none letter from the end of the string and attaching it to the front.');
 
 document.write('<div id="textrotator"> w3resource </div>');
 

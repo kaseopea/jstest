@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a function, funcCaller, that takes a func (a function) and an arg (any data type).\n' +
+page.title('Write a function, funcCaller, that takes a func (a function) and an arg (any data type).\n' +
     'The function returns the func called with arg(as an argument).');
 
 var funcCaller = function ( func, arg ) {
@@ -7,7 +7,7 @@ var funcCaller = function ( func, arg ) {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a function, firstVal, that takes an array, arr, and a function, func, and calls func with\n' +
+page.title('Write a function, firstVal, that takes an array, arr, and a function, func, and calls func with\n' +
     'the first index of the arr, the index # and the whole array.');
 var firstVal = function ( arr, func) {
     return func(arr[0], 0, arr);
@@ -15,7 +15,7 @@ var firstVal = function ( arr, func) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Change firstVal to work not only with arrays but also objects. Since objects are not ordered,\n' +
+page.title('Change firstVal to work not only with arrays but also objects. Since objects are not ordered,\n' +
     'you can use any key-value pair on the object.');
 
 var firstVal = function ( list, func) {
@@ -28,7 +28,7 @@ var firstVal = function ( list, func) {
 
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Extra Credit] Write a function, once, (see: http://underscorejs.org/#once) that takes a function and returns\n' +
+page.title('Extra Credit] Write a function, once, (see: http://underscorejs.org/#once) that takes a function and returns\n' +
     'a version of that function which can only be called once. [Hint: you need a closure] You probably don\'t want\n' +
     'to be able to double charge someone\'s credit card.');
 

@@ -7,16 +7,16 @@ var zipCode = {
     zip: "11800"
 };
 
-divider();
+page.divider();
 
 updateZipCode("25000", "US");
 
-divider();
+page.divider();
 
 updateZipCode.call(zipCode, "25000", "US");
 
-divider();
+page.divider();
 
 updateZipCode.apply(zipCode, ["3200", "RU"]);
 
-divider();
+page.divider();

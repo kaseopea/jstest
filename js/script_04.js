@@ -2,7 +2,7 @@
  Решение задачек по ссылке http://www.w3resource.com/javascript-exercises/javascript-functions-exercises.php
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.');
+page.title('Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.');
 
 var vowelsCount = function(string) {
     var vowel_list = 'aeiouAEIOU';
@@ -22,7 +22,7 @@ console.log(vowelsCount('The quick brown fox'));
 console.log(vowelsCount('Write a JavaScript function that accepts a string as a parameter and counts the number of vowels within the string'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that accepts a string as a parameter and find the longest word within the string.');
+page.title('Write a JavaScript function that accepts a string as a parameter and find the longest word within the string.');
 
 var test1 = 'Write a JavaScript function that accepts a string as a parameter_in_my_mind and find the longest word within the string';
 var test2 = 'Web Development Tutorial';
@@ -42,7 +42,7 @@ console.log(maxWordLength(test2));
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that accepts a string as a parameter and converts the first letter of each word\n' +
+page.title('Write a JavaScript function that accepts a string as a parameter and converts the first letter of each word\n' +
     'of the string in upper case. the quick brown fox - The Quick Brown Fox');
 
 String.prototype.replaceAt = function(index, character) {
@@ -62,7 +62,7 @@ var capWords = function (string) {
 console.log(capWords('the quick brown fox'));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that returns a passed string with letters in alphabetical order.');
+page.title('Write a JavaScript function that returns a passed string with letters in alphabetical order.');
 
 var lettersSort = function (string) {
     var letters = string.split('');
@@ -75,13 +75,13 @@ console.log(lettersSort('webmaster'));
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that generates all combinations of a string. dog - d,do,dog,o,og,g');
+page.title('Write a JavaScript function that generates all combinations of a string. dog - d,do,dog,o,og,g');
 
 console.log('Разобраться с примерами по ссылке http://www.w3resource.com/javascript-exercises/javascript-function-exercise-3.php')
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that checks whether a passed string is palindrome or not? A palindrome is word,\nphrase, or sequence that reads the same backward as forward, e.g., madam or nurses run.');
+page.title('Write a JavaScript function that checks whether a passed string is palindrome or not? A palindrome is word,\nphrase, or sequence that reads the same backward as forward, e.g., madam or nurses run.');
 
 var test1 = 'race car';
 var test2 = 'race far';
@@ -103,7 +103,7 @@ console.log(palindromeOrNot(test3));
 console.log(palindromeOrNot(''));
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-titler('Write a JavaScript function that reverse a number. 32243 to 34223.');
+page.title('Write a JavaScript function that reverse a number. 32243 to 34223.');
 
 var number = 32243;
 console.log(number);

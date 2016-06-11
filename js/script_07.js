@@ -46,7 +46,7 @@ function sum(numbers) {
 	}
 	return sum;
 }
-divider();
+page.divider();
 
 
 /** -----------------------------------
@@ -83,7 +83,7 @@ function reverseArrayInPlace(arr) {
 /** -----------------------------------
  Списки
  ----------------------------------- */
-divider();
+page.divider();
 var list = {
     value:1,
     rest: {

@@ -22,7 +22,7 @@
 if ($handle = opendir('js')) {
     while (false !== ($entry = readdir($handle))) {
         if ($entry != "." && $entry != ".." && $entry != "general.js") {
-            $file = explode(".",$entry); ?>
+            $file = explode(".",$entry);?>
     <li><a href="index.php?s=<?php echo $file[0];?>"><?php echo $entry;?></a></li>
 <? }} closedir($handle);} ?>
 </ul>

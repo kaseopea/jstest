@@ -1,7 +1,7 @@
 /**
  * Created by vitalyrusov on 25.03.16.
  */
-titler('Белка Works');
+page.title('Белка Works');
 
 var JOURNAL = [
   {"events":["carrot","exercise","weekend"],"squirrel":false},
@@ -97,7 +97,7 @@ var JOURNAL = [
 ];    
 
 function addJournalEvent(events,didTurnIntoSquirrel) {
-	journal.push({
+    JOURNAL.push({
 		events: events,
 		squirrel: didTurnIntoSquirrel
 	});
@@ -105,4 +105,4 @@ function addJournalEvent(events,didTurnIntoSquirrel) {
 
 addJournalEvent(["carrot","ice cream","lettuce","bread"],true);
 
-divider();
+page.divider();

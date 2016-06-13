@@ -1,12 +1,16 @@
 (function () {
     $ = function(selector) {
-        var arrLike = {};
+
+        //Remove new
+        if (!(this instanceof $)) {
+            return new $(selector);
+        }
+
         var elements = document.querySelectorAll(selector);
 
         Array.prototype.push.apply(this, elements);
        /* for (var i = 0; i < elements.length; i++) {
             this[i] = elements[i];
-            //arrLike.push.apply(this,elements[i]);
         }
         this[length] = elements.length;*/
         return this;
@@ -67,21 +71,47 @@
         }
     });
 
+    var getText = function (el) {
+        var txt = "";
+        $.each(el.childNodes, function(i, childNode) {
+            if(childNode.nodeType === Node.TEXT_NODE) {
+                txt += childNode.nodeValue;
+            } else if (childNode.nodeType === Node.ELEMENT_NODE) {
+                txt += getText(childNode);
+            }
+        });
+
+        return txt;
+    }
 
     $.extend($.prototype, {
         html: function(newHtml) {
             if( arguments.length) {
                 //set
                 $.each(this, function (i, el) {
-                    this[el[i]].innerHTML = newHtml;
+                    el.innerHTML = newHtml;
                 });
                 return this;
-            } else {
-                //get
-            }
+            } else return this[0] && this[0].innerHTML;
         },
-        val: function(value) {},
-        text: function(string) {},
+        val: function(newVal) {
+            if(arguments.length) {
+                $.each(this, function (i, el) {
+                    el.val(newVal);
+                });
+                return this;
+            } else return this[0] && this[0].value;
+        },
+        text: function(newText) {
+            if(arguments.length) {
+                //setter
+                this.html("");
+                return $.each(this, function (i, el) {
+                    var textNode = document.createTextNode(newText);
+                    el.appendChild(textNode);
+                });
+            } else return this[0] && getText(this[0]);
+        },
         find: function(el) {},
         next: function() {},
         prev: function() {},
@@ -106,6 +136,15 @@ var dog = {
 var speakProxy = $.proxy(dog.speak, dog);
 //console.log(speakProxy('woof!'));
 
-var sc = new $('#scripts li');
-console.log(sc);
-sc[0].html('')
+var sc = new $('#scripts');
+//console.log(sc);
+//sc.html('Cool-cool stuff');
+
+document.write('<input id="testInput" value="200">');
+
+var inp = new $('#testInput');
+//console.log(inp);
+//console.log(inp.val());
+
+//console.log(sc);
+//console.log(sc.text());

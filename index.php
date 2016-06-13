@@ -17,7 +17,7 @@
 </head>
 <body>
 <h2>List of scripts</h2>
-<ul>
+<ul id="scripts">
 <?php
 if ($handle = opendir('js')) {
     while (false !== ($entry = readdir($handle))) {

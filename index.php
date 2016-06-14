@@ -6,8 +6,8 @@
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <?php
-        include('lib/mocha_head.php');
-        include('lib/chai.php');
+        // include('lib/mocha_head.php');
+        // include('lib/chai.php');
     ?>
 
     <style>
@@ -32,7 +32,7 @@ if ($handle = opendir('js')) {
 <?php if (isset($_GET['s'])) { ?>
     <script src="js/<?php echo trim($_GET['s']); ?>.js"></script>
 <?php } ?>
-<?php include('lib/mocha_bottom.php'); ?>
+<?php //include('lib/mocha_bottom.php'); ?>
 
 </body>
 </html>

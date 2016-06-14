@@ -1,5 +1,5 @@
 (function () {
-    $ = function(selector) {
+    $ = function (selector) {
 
         //Remove new
         if (!(this instanceof $)) {
@@ -17,9 +17,9 @@
     };
 
             $.extend = function (target, object) {
-                for( var prop in object) {
+                for ( var prop in object) {
                     if (object.hasOwnProperty(prop)) target[prop] = object[prop];
-                };
+                  };
                 return target;
             };
 
@@ -39,6 +39,7 @@
                 isArray: function(obj) {
                     return Object.prototype.toString.call(obj) === "[object Array]";
                 },
+
                 each: function(collection, cb){
                     if(isArrayLike(collection)) {
                         for ( var i = 0; i < collection.length; i++) {
@@ -55,6 +56,7 @@
                     };
                     return collection;
         },
+
         makeArray: function(arr){
             var array = [];
             $.each(arr, function(i, value) {
@@ -64,6 +66,7 @@
             return array;
 
         },
+
         proxy: function(fn, context){
             return function () {
                 return fn.apply(context, arguments);

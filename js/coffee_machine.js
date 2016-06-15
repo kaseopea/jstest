@@ -31,6 +31,7 @@ var CoffeeMachine = function (power, capacity) {
     var timerID;
     var self = this;
 
+
     console.log("Создана кофеварка с мощностью " + power + " Ватт.");
 
     //Время готовки кофе
@@ -150,6 +151,7 @@ var Fridge = function (power, temperature) {
     Machine.apply(this, arguments);
     var MAX_CAPACITY = Math.round(power / 100);
     var food = [];
+
     this.addFood = function () {
         if (this._enabled) {
             for (var i = 0; i < arguments.length; i++) {
@@ -169,13 +171,44 @@ var Fridge = function (power, temperature) {
     }
 
     this.filterFood = function (func) {
-        return food.filter(filter);
+      var result = [];
+        if (food.length > 0) {
+          if((typeof food[0]) == 'object') {
+            for(var item in food) {
+              if(func(food[item])) result.push(food[item]);
+            }
+          } else {
+            result = food.filter(func);
+          }
+
+          return result;
+        };
+
     };
 
+    var parentDisable = this.disable;
+    this.disable = function () {
+      if(food.length == 0) {
+        parentDisable();
+      } else console.log("Нельзя выключить, в холодильнике есть еда");
+    }
+
     this.removeFood = function (item) {
-        console.log(item);
-        var idx = food.indexOf(item);
-        if (idx != -1) food.splice(idx, 1);
+        if (food.length > 0) {
+          if((typeof food[0]) == 'object') {
+            for(var i = 0; i < food.length; i++) {
+              if(food[i].title === item) {
+                delete food.splice(i,1);
+                break;
+              }
+            }
+          } else {
+            var foundIndex = food.indexOf(item);
+            if (foundIndex != -1) food.splice(foundIndex, 1);
+          }
+        }
+        // console.log(typeof food[0]);
+
     };
 };
 
@@ -193,12 +226,6 @@ var Fridge = function (power, temperature) {
  // добавление элементов не влияет на еду в холодильнике
  fridgeFood.push("вилка", "ложка");
  console.log( fridge.getFood() ); // внутри по-прежнему: котлета, сок, варенье*/
-
-var testObj = [{title: "сок", calories: 30}, {title: "зелень", calories: 10}, {title: "варенье", calories: 150}];
-console.log(testObj);
-console.log(testObj.length);
-console.log(testObj);
-console.log(testObj.indexOf({title: "зелень", calories: 10}));
 
 
 var fridge = new Fridge(500);
@@ -222,18 +249,16 @@ fridge.addFood({
 console.log(fridge.getFood());
 
 fridge.removeFood("нет такой еды"); // без эффекта
-fridge.removeFood("сок"); // без эффекта
-console.log(fridge.getFood().length); // 4
-/*
+page.end();
+// fridge.removeFood("сок"); // без эффекта
 
-
- var dietItems = fridge.filterFood(function(item) {
- return item.calories < 50;
- });
-
- dietItems.forEach(function(item) {
- console.log( item.title ); // сок, зелень
- fridge.removeFood(item);
- });
-
- console.log( fridge.getFood().length ); // 2*/
+var dietItems = fridge.filterFood(function(item) {
+  return item.calories < 50;
+});
+console.log(dietItems);
+dietItems.forEach(function(item) {
+  console.log( item.title ); // сок, зелень
+  fridge.removeFood(item.title);
+});
+console.log( fridge.getFood());
+fridge.disable();

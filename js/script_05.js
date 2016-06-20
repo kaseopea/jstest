@@ -11,10 +11,6 @@ for (var i = 0; i < tags.length; i++) {
             return document.createElement(tag);
         };
     })(tags[i]);
-
-    /*make[tag] = function () {
-        return document.createElement(tag);
-    };*/
 }
 
 var h1 = make.h1();

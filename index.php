@@ -6,8 +6,8 @@
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <?php
-        // include('lib/mocha_head.php');
-        // include('lib/chai.php');
+        include('lib/mocha_head.php');
+        include('lib/chai.php');
     ?>
 
     <style>
@@ -27,12 +27,22 @@ if ($handle = opendir('js')) {
 <? }} closedir($handle);} ?>
 </ul>
 
+<div style="font-size:10px">
+  inner4
+  <div style="font-size:25px">
+    inner3
+    <div style="font-size:50px">
+      inner2
+    </div>
+  </div>
+</div>
+
 <script src="js/vendor/underscore-min.js"></script>
 <script src="js/general.js"></script>
 <?php if (isset($_GET['s'])) { ?>
     <script src="js/<?php echo trim($_GET['s']); ?>.js"></script>
 <?php } ?>
-<?php //include('lib/mocha_bottom.php'); ?>
+<?php include('lib/mocha_bottom.php'); ?>
 
 </body>
 </html>

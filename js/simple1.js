@@ -19,21 +19,18 @@ function isPrime(num) {
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 var arr = [1,3,4,4,4,4,5];
-var example = [4,1,2,3,5];
+var exampleArr = [4,1,2,3,5];
 //Result: [4,4,4,4,1,3,5]
 
 
-var sortByExample = function (arr, example) {
+var sortByExample = function (arr, exampleArr) {
   var result = [];
-  for ( var i = 0; i < example.length; i++) {
-    var search = arr.filter(function(value){
-      return value == example[i];
-    });
+  for ( var i = 0; i < exampleArr.length; i++) {
     result = result.concat(arr.filter(function(value){
-      return value == example[i];
+      return value == exampleArr[i];
     }));
   }
   return result;
 }
 
-console.log(sortByExample(arr,example));
+console.log(sortByExample(arr,exampleArr));

@@ -1,43 +1,38 @@
-function Rabbit(type) {
-    this.type = type;
+function isMerge(s, part1, part2) {
+  var sArray = s.split('');
+
+  console.log(sArray);
+
+  checkPart(part1);
+  console.log(sArray);
+  console.log('-------------');
+  checkPart(part2);
+  console.log(sArray);
+
+  function checkPart(part) {
+
+    console.log(part);
+
+    if (part) {
+      var startIndex = 0;
+      for ( i = 0; i < part.length; i++) {
+        var line = sArray.join('');
+        var charIndex = line.indexOf(part[i], startIndex);
+        console.log(charIndex);
+        console.log(line);
+        if (charIndex !== -1) {
+          sArray[charIndex] = '*';
+          startIndex = charIndex + 1;
+        } else {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
+
+  }
 }
 
-Rabbit.prototype.speak = function(line) {
-    console.log(this.type + " кролик говорит: '" + line + "'");
-}
-Rabbit.prototype.teeth = "мелкие";
-
-var killerRabbit = new Rabbit('убийственный');
-var blackRabbit = new Rabbit('черный');
-
-killerRabbit.teeth = "длинные, острые и окровавленные";
-
-// blackRabbit.speak("Всем капец!");
-// killerRabbit.speak("Всем стоять!");
-
-// console.log(blackRabbit.type);
-// console.log(Object.getPrototypeOf(blackRabbit));
-
-// console.log(killerRabbit.teeth);
-// console.log(blackRabbit.teeth);
-// console.log(Rabbit.prototype.teeth);
-
-
-/////////////////////////////////////////////////////////////////////////////
-var map = {};
-function storePhi(event, phi) {
-    map[event] = phi;
-}
-storePhi("пицца", 0.069);
-storePhi("тронул дерево", -0.081);
-
-Object.prototype.nonsense = "ку";
-// for ( var name in map) console.log(name);
-
-delete Object.prototype.nonsense;
-// for ( var name in map) console.log(name);
-
-// console.log( "nonsense" in map);
-// console.log( "toString" in map);
-
-/////////////////////////////////////////////////////////////////////////////
+console.log(isMerge("Bananas from Bahamas", "Bahas", "Bananas from am"));

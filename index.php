@@ -27,6 +27,16 @@ if ($handle = opendir('js')) {
 <? }} closedir($handle);} ?>
 </ul>
 
+<div style="font-size:10px">
+  inner4
+  <div style="font-size:25px">
+    inner3
+    <div style="font-size:50px">
+      inner2
+    </div>
+  </div>
+</div>
+
 <script src="js/vendor/underscore-min.js"></script>
 <script src="js/general.js"></script>
 <?php if (isset($_GET['s'])) { ?>

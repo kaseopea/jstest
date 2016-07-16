@@ -41,4 +41,4 @@ Function.prototype.defer = function (delay) {
   };
 }
 
-f.defer(1000)(1,2);
+f.defer(1000)(1, 2);

@@ -1,30 +1,42 @@
 function mostFrequentDays(year){
   //your code here
+  var week = [0,1,2,3,4,5,6];
+  var daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var firstDay = new Date(year, 0, 1);
   var lastDay = new Date(year, 11, 31);
   var first = firstDay.getDay();
   var last = lastDay.getDay();
-  console.log(first);
-  console.log(last);
-  var leap = leapYear(year);
 
+  var firstWeek = [];
+  var lastWeek = [];
+  var frequentDays = [];
+  for ( var i = first; i < 7; i++ ) { firstWeek[i] = i; }
+  for ( var i = 0; i <= last; i++ ) { lastWeek[i] = i; }
+
+  week.map(function(el, i, arr) {
+    if ((arr[i] === firstWeek[i]) && (arr[i] === lastWeek[i])) {
+      frequentDays.push(arr[i]);
+    };
+  });
+
+  return frequentDays.map(function(el,i,arr) {
+      return daysInWeek[arr[i]];
+  });
+
+  var leap = leapYear(year);
   if (!leapYear(year)) {
 
   }
-  console.log(leap);
 
-  var endDate = new Date(year + 1, 0, 1, 0, 0, 0, 0);
-  var daysOfYear = [];
-  for (var d = new Date(year, 0, 1, 0, 0, 0, 0); d <= endDate; d.setDate(d.getDate() + 1)) {
-      daysOfYear.push(new Date(d));
-  }
+  // var endDate = new Date(year + 1, 0, 1, 0, 0, 0, 0);
+  // var daysOfYear = [];
+  // for (var d = new Date(year, 0, 1, 0, 0, 0, 0); d <= endDate; d.setDate(d.getDate() + 1)) {
+  //     daysOfYear.push(new Date(d));
+  // }
   // console.log(daysOfYear);
   function leapYear(year) {
     return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
   }
-
-  console.log(leapYear(year));
-  return '\n';
 }
 
 console.log(mostFrequentDays(2015)); // ['Tuesday', 'Wednesday'], "Should be: ['Tuesday', 'Wednesday']"

@@ -5,8 +5,32 @@ var m = function() {
   console.log(arguments instanceof Array);
   console.log(args instanceof Array);
 
+
+
   console.log(args);
   return args;
 }
 
-m(1,2,3,4,5);
+var argsToArray = function(args) {
+  return Array.prototype.slice.call(args,0);
+}
+
+var partial = function() {
+  var args = argsToArray(arguments);
+  var fn = args.shift(); //first arg is a function
+
+  return function() {
+    var otherArgs = argsToArray(arguments);
+    return fn.apply(this,args.concat(otherArgs));
+  }
+}
+
+var twinkle = function(noun, wonderAbout) {
+    return 'Twinkle, twinkle, little ' +
+        noun + '\nHow I wonder where you ' +
+        wonderAbout;
+}
+var twinkleBat = partial(twinkle, 'bat', 'are at');
+var twinkleStar = partial(twinkle, 'star', 'are');
+console.log(twinkleBat());
+console.log(twinkleStar());

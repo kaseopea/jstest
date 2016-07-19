@@ -1,98 +1,47 @@
-//https://www.codewars.com/kata/merged-string-checker/train/javascript
+// In this kata, you should calculate type of triangle with three given sides a, b and c (given in any order).
+//
+// If all angles are less than 90°, this triangle is acute and function should return 1.
+//
+// If one angle is strictly 90°, this triangle is right and function should return 2.
+//
+// If one angle more than 90°, this triangle is obtuse and function should return 3.
+//
+// If three sides cannot form triangle, or one angle is 180° (which turns triangle into segment) - function should return 0.
+//
+// Input parameters are sides of given triangle. All input values are non-negative floating point or integer numbers (or both).
+/* Should return ᐃ type:
+  0 : if ᐃ cannot be made with given sides
+  1 : acute ᐃ
+  2 : right ᐃ
+  3 : obtuse ᐃ
+*/
+function triangleType(a, b, c){
+  //check if triangle is possible
+  if (((a + b) <= c) || ((b + c) <= a) || ((a + c) <= b)) {
+    return 0;
+  } else {
 
+    //angles
+    var alpha = Math.acos((Math.pow(b,2) + Math.pow(c,2) - Math.pow(a,2))/(2*b*c))*180/Math.PI;
+    var betta = Math.acos((Math.pow(a,2) + Math.pow(c,2) - Math.pow(b,2))/(2*a*c))*180/Math.PI;
+    var gamma = Math.acos((Math.pow(a,2) + Math.pow(b,2) - Math.pow(c,2))/(2*a*b))*180/Math.PI;
 
-function isMerge(s, part1, part2) {
-    var pattern = part1.concat(part2).split('');
-    var sArray = s.split('');
-    var i;
-
-    if (pattern.length !== sArray.length) {
-        return false;
-    }
-    // if ( part1 === part2) {
-    //   return false;
-    // }
-    if (!part1 && !part2 && !s) return true;
-    if (!part1 && !part2) return false;
-    if (!s) return false;
-
-    if (!part1 && (s.length !== part2.length)) return false;
-    if (!part2 && (s.length !== part1.length)) return false;
-
-    // if(part1 === ' ')
-
-    if(!part1 && (s === part2)) return true;
-    if(!part2 && (s === part1)) return true;
-
-    // console.log('> '.trim().length);
-    // var test = '';
-    // console.log(part2);
-    // if (!part2) {
-    //   console.log('>>' + test.length);
-    // }
-
-    // console.log(checkPart(s, part1));
-    // console.log(checkPart(s, part2));
-
-
-    return (checkPart(s, part1) && checkPart(s, part2)) ? true : false;
-
-    function checkPart(s, part) {
-
-        if (part && s) {
-            var startIndex = 0;
-            for ( i = 0; i < part.length; i++) {
-                var charIndex = s.indexOf(part[i], startIndex);
-                if (charIndex !== -1) {
-                    startIndex = charIndex + 1;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        } else {
-            return false;
-        }
-
+    if ((alpha === 90) || (betta === 90) || (gamma === 90)) {
+      return 2;
     }
 
+    if ((alpha < 90) && (betta < 90) && (gamma < 90)) {
+      return 1;
+    }
+
+    if (( alpha >=90) && (alpha <=180)) return 3;
+    if (( betta >=90) && (betta <=180)) return 3;
+    if (( gamma >=90) && (gamma <=180)) return 3;
+  }
 }
 
-// console.log(isMerge('codewars', 'code', 'wars'));
-console.log(isMerge('  ', ' ', ' '));
-// console.log(isMerge("Bananas from Bahamas", "Bahas", "Bananas from am"));
-// console.log(!isMerge('codewars', 'cod', 'wars'));
-// console.log(isMerge('codewars', 'code', 'code'));
-// console.log(isMerge('manna codewars', 'mnacod', 'wasr'));
-
-// console.log(!isMerge('codewars', 'cod', 'wars'));
-
-
-
-
-function isMerge2(s, part1, part2) {
-    var matchStr = [];
-    var pattern = part1.concat(part2).split('');
-    var i;
-
-    console.log(s);
-    console.log(pattern);
-
-    if (pattern.length > s.length) return false;
-
-    for (i = 0; i < pattern.length; i++) {
-        var charIndex = s.indexOf(pattern[i]);
-        console.log(charIndex);
-        if (charIndex !== -1 ) {
-            matchStr[charIndex] = pattern[i];
-        } else {
-            return false;
-        }
-    }
-    matchStr = matchStr.join('');
-    if (matchStr === s) {
-        return true;
-    } else {
-        return false;
-    }
-}
+console.log(triangleType(7,3,2));
+console.log(triangleType(2,4,6));
+console.log(triangleType(8,5,7));
+console.log(triangleType(3,4,5));
+console.log(triangleType(7,12,8));

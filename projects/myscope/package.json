@@ -1,0 +1,18 @@
+{
+  "name": "myscope",
+  "version": "1.0.0",
+  "description": "myscope hometask",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scope",
+    "angular"
+  ],
+  "author": "Vitaly Rusov",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
+}

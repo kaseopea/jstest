@@ -3,11 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Scope test</title>
+
+  <!-- подключаем chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+  <!-- в chai есть много всего, выносим assert в глобальную область -->
+  <script>var assert = chai.assert;</script>
+  <!-- подключаем стили Mocha, для отображения результатов -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+  <!-- подключаем библиотеку Mocha -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+  <!-- настраиваем Mocha: предстоит BDD-тестирование -->
+  <script>mocha.setup('bdd');</script>
+
 </head>
 <body>
 
-<script src="node_modules/lodash/lodash.min.js"></script>
-<script src="scope.js"></script>
-<script src="app.js"></script>
+  <div id="mocha"></div>
+
+
+  <script src="node_modules/lodash/lodash.min.js"></script>
+  <script src="scope.js"></script>
+  <script src="app.js"></script>
+  <script src="tests.js"></script>
+
+
+<!-- запустить тесты! -->
+<script>
+    mocha.run();
+</script>
 </body>
 </html>

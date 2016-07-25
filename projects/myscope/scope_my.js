@@ -29,32 +29,30 @@ function Scope() {
     this.$$phase = null;
 };
 
-function initWatcher() {
-};
+function initWatcher() {};
 
 // Watch ------------------------------------------------------------------------------------------------------------------------------------------------
-Scope.prototype.$watch = function (watchFn, listenerFn, equalValueFlag) {
+Scope.prototype.$watch = function(watchFn, listenerFn, equalValueFlag) {
     var watcherIndex;
     var watchObj = {
         watcher: watchFn,
-        listener: listenerFn || function () {
-        },
+        listener: listenerFn || function() {},
         last: initWatcher,
         equalByValue: !!equalValueFlag
     };
 
     this.$$watchers.push(watchObj);
 
-    return function (watchObj) {
+    return function(watchObj) {
         watcherIndex = _.indexOf(this.$$watchers, watchObj);
-        if (watcherIndex >=0 ) {
-            this.$$watchers.splice(watcherIndex,1);
+        if (watcherIndex >= 0) {
+            this.$$watchers.splice(watcherIndex, 1);
         }
     }
 };
 
 // Digest  ------------------------------------------------------------------------------------------------------------------------------------------------
-Scope.prototype.$digest = function () {
+Scope.prototype.$digest = function() {
     var _this = this;
     var dirty;
     var maxCycles = 10;
@@ -80,7 +78,7 @@ Scope.prototype.$digest = function () {
         while (this.$$postDigestQueue.length) {
             try {
                 this.$$postDigestQueue.shift()();
-            } catch(e) {
+            } catch (e) {
                 console.error(e);
             }
 
@@ -91,14 +89,14 @@ Scope.prototype.$digest = function () {
     this.$endPhase();
 };
 
-Scope.prototype.$digestOnce = function () {
+Scope.prototype.$digestOnce = function() {
     var _this = this;
     var oldVal;
     var newVal;
     var dirty = false;
 
 
-    _.forEach(this.$$watchers, function (watchObj) {
+    _.forEach(this.$$watchers, function(watchObj) {
         try {
             newVal = watchObj.watcher(_this);
             oldVal = watchObj.last;
@@ -120,7 +118,7 @@ Scope.prototype.$digestOnce = function () {
     return dirty;
 };
 
-Scope.prototype.$checkEquality = function (newVal, oldVal, equalByValue) {
+Scope.prototype.$checkEquality = function(newVal, oldVal, equalByValue) {
     if (equalByValue) {
         // check for reference data types
         return _.isEqual(newVal, oldVal);
@@ -131,7 +129,7 @@ Scope.prototype.$checkEquality = function (newVal, oldVal, equalByValue) {
 };
 
 // Async Queue ------------------------------------------------------------------------------------------------------------------------------------------------
-Scope.prototype.$eval = function (expression, args) {
+Scope.prototype.$eval = function(expression, args) {
     try {
         return expression(this, args);
     } catch (e) {
@@ -139,7 +137,7 @@ Scope.prototype.$eval = function (expression, args) {
     }
 };
 
-Scope.prototype.$apply = function (func, args) {
+Scope.prototype.$apply = function(func, args) {
     try {
         this.$beginPhase('$apply phase');
         this.$eval(func);
@@ -149,11 +147,11 @@ Scope.prototype.$apply = function (func, args) {
     }
 };
 
-Scope.prototype.$evalAsync = function (expression) {
+Scope.prototype.$evalAsync = function(expression) {
     var _this = this;
 
     if (!_this.$$phase && !_this.$$asyncQueue.length) {
-        setTimeout(function () {
+        setTimeout(function() {
             if (_this.$$asyncQueue.length) {
                 _this.$digest();
             }
@@ -167,7 +165,7 @@ Scope.prototype.$evalAsync = function (expression) {
 };
 
 // Phases ------------------------------------------------------------------------------------------------------------------------------------------------
-Scope.prototype.$startPhase = function (phase) {
+Scope.prototype.$startPhase = function(phase) {
     if (this.$$phase) {
         throw this.$$phase + ' is already running!';
     } else {
@@ -175,18 +173,46 @@ Scope.prototype.$startPhase = function (phase) {
     }
 };
 
-Scope.prototype.$endPhase = function () {
+Scope.prototype.$endPhase = function() {
     this.$$phase = null;
 };
 
 // Post Digest ------------------------------------------------------------------------------------------------------------------------------------------------
-Scope.prototype.$postDigest = function (expression) {
+Scope.prototype.$postDigest = function(expression) {
     this.$$postDigestQueue.push(expression);
 };
 
 
 // Watch Group Method ------------------------------------------------------------------------------------------------------------------------------------------------
-Scope.prototype.$watchGroup = function(watchFuncs, listenerFn) {
+Scope.prototype.$watchGroup = function(watchFuncs, listenerFunc) {
     var _this = this;
+
+    var oldVals = new Array(watchFuncs.length);
+    var newVals = new Array(watchFuncs.length);
+
+    var removeWatchFuncs = [];
+
+    var canCallListener = true;
+
+    // if no watch functions specified we call listener async
+    if (!watchFuncs.length) {
+        _this.$evalAsync(function() {
+            if (canCallListener) {
+                listenerFunc(newVals, oldVals, _this);
+            }
+        });
+        return function() {
+            canCallListener = false;
+        }
+    }
+
+    //
+    _.forEach(watchFuncs, function watchGroupAction(expression, index) {
+        var deregister = _this.$watch(expression, function watchgroupSubAction(newVal, oldVal) {
+          newVals[index] = newVal;
+          oldVals[index] = oldVal;
+        });
+    });
+
 
 };

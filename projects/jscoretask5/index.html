@@ -3,6 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+    <script>
+        var testObj = {
+            a: 10,
+            b: 'string',
+            c: true,
+            d: [],
+            m: function() {
+                console.log('Hello from testObj');
+            }
+        };
+
+        var newObj = Object.create(testObj);
+        console.log(newObj);
+
+        newObj.a = 20;
+        newObj.b = 'newstring';
+        newObj.c = false;
+        newObj.d = [{name:1}, {name:2}, {name:3}];
+        newObj.m = function() {
+            console.log('Hello from newObj');
+        };
+        console.log(newObj);
+
+
+
+        var secondObj = Object.create(testObj);
+        secondObj.a = 1000;
+        secondObj.b = 'secondObj';
+        secondObj.c = true;
+        secondObj.d = [{age:1}, {age:2}, {age:3}, {age:4}, {age:5}];
+        secondObj.m = function() {
+            console.log('Hello from secondObj');
+        };
+        console.log(secondObj);
+
+    </script>
 </head>
 <body>
   <a href="task1.html">Task 1</a>

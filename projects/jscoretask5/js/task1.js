@@ -17,78 +17,130 @@
 // 4. all methods and properties must be attached to the prototype of the Person
 
 function Person(firstname, lastname, age) {
+    //Options
+    var _minCharsName = 3;
+    var _maxCharsName = 20;
+    var _minAge = 0;
+    var _maxAge = 150;
 
-  // Firstname & lastname
-  if (this.nameValidator(firstname) && this.nameValidator(lastname)) {
+    // Privates
+    var _firstname = '';
+    var _lastname = '';
+    var _age = 0;
+
+    // Firstname property
+    Object.defineProperty(this, 'firstname', {
+        get: function () {
+            return _firstname;
+        },
+        set: function (firstname) {
+            if (this.nameValidator(firstname, _minCharsName, _maxCharsName)) {
+                _firstname = firstname;
+            } else {
+                console.error('Firstname is invalid. It should be between '+ _minCharsName + '..' + _maxCharsName + ' letters long.');
+            }
+        }
+    });
+
+
+    // Lastname property
+    Object.defineProperty(this, 'lastname', {
+        get: function () {
+            return _lastname;
+        },
+        set: function (lastname) {
+            if (this.nameValidator(lastname, _minCharsName, _maxCharsName)) {
+                _lastname = lastname;
+            } else {
+                console.error('Lastname is invalid. It should be between '+ _minCharsName + '..' + _maxCharsName + ' letters long.');
+            }
+        }
+    });
+
+    // Age Property
+    Object.defineProperty(this, 'age', {
+        get: function () {
+            return _age;
+        },
+        set: function (age) {
+            if (this.ageValidator(age, _minAge, _maxAge)) {
+                _age = age;
+            } else {
+                console.error('Check age. It should be in range of ' + _minAge + '..' + _maxAge);
+            }
+        }
+    });
+
+    // Setting up
     this.firstname = firstname;
     this.lastname = lastname;
-  } else {
-    throw new Error('Check firstname and lastname. It must be a string, between 3..20 characters long');
-  }
-  if(this.ageValidator(age) && this.ageValidator(age)) {
     this.age = age;
-  } else {
-    throw new Error('Check age. It should be in range of ' + minAge + '..' + maxAge);
-  }
 
-  // Fullname property
-  Object.defineProperty(this, 'fullname', {
-    get: function () {
-      return this.firstname + ' ' + this.lastname;
-    },
-    set: function (fullname) {
-      var names = fullname.split(' ');
-      var fname = names[0];
-      var lname = names[1];
 
-      if (this.nameValidator(fname) && this.nameValidator(lname)) {
-        this.firstname = names[0];
-        this.lastname = names[1];
+    // Fullname property
+    Object.defineProperty(this, 'fullname', {
+        get: function () {
+            return this.firstname + ' ' + this.lastname;
+        },
+        set: function (fullname) {
+            var names = fullname.split(' ');
+            var fname = names[0];
+            var lname = names[1];
 
-      } else {
-        throw new Error('Firstname or lastname is invalid');
-      }
+            if (this.nameValidator(fname, _minCharsName, _maxCharsName) && this.nameValidator(lname, _minCharsName, _maxCharsName)) {
+                this.firstname = names[0];
+                this.lastname = names[1];
+
+            } else {
+                console.error('Firstname or lastname is invalid');
+            }
+        }
+    });
+
+};
+
+
+// nameValidator method
+Person.prototype.nameValidator = function (name, minChar, maxChar) {
+    var nameRegexp = new RegExp('^[a-z]+', 'ig');
+    if (_.isString(name)) {
+        return (nameRegexp.test(name) && _.inRange(name.length, minChar, maxChar));
+    } else {
+        return false;
     }
-  });
 
 };
 
-
-Person.prototype.nameValidator = function (name) {
-  var nameRegexp = new RegExp('^[a-z]{3,20}', 'i');
-  return (nameRegexp.test(name) && _.isString(name)) ? true : false;
+// ageValidator method
+Person.prototype.ageValidator = function (age, minAge,maxAge) {
+    return (_.inRange(age, minAge, maxAge + 1) && (age >= 0) && (_.isNumber(age) || _.isString(age)) && !isNaN(parseInt(age)));
 };
 
-Person.prototype.ageValidator = function(age) {
-  var minAge = 0;
-  var maxAge = 150;
-
-  return (_.inRange(age, minAge, maxAge + 1) && (_.isNumber(age) || _.isString(age)) && !isNaN(parseInt(age))) ? true : false;
-};
-
-// Person.prototype.setFullName = function(fullname) {
-//   var names = fullname.split(' ');
-//   this.firstname = names[0];
-//   this.lastname = names[1];
-// };
-//
-// Person.prototype.getFullName = function() {
-//   return this.firstname + ' ' + this.lastname;
-// };
-
+// introduce method
 Person.prototype.introduce = function () {
-  return 'Hello! My name is ' + this.firstname + ' ' + this.lastname + ' and I am ' + this.age + '-years-old';
+    return 'Hello! My name is ' + this.firstname + ' ' + this.lastname + ' and I am ' + this.age + '-years-old';
 };
 
-var person1 = new Person('Ivan', 'Ivanov', 20);
-var person2 = new Person('Vitaly', 'Rusov', '32');
 
+// Tests
+
+console.log('Task 1 ***********************************\n\n');
+
+var person1 = new Person('Vitaly', 'Rusov', '32');
 console.log(person1.introduce());
-console.log(person2.introduce());
-
-console.log(person1);
 console.log(person1.fullname);
 
+console.log('person1 instanceof Person ', person1 instanceof Person);
+console.log('Person.prototype === person1.__proto__ ', Person.prototype === person1.__proto__);
 
-console.log(person2);
+
+console.log('\n\n');
+
+var person2 = new Person('Ivan', 'Ivanov', 20);
+console.log(person2.introduce());
 console.log(person2.fullname);
+
+
+//var person3 = new Person('32');
+//var person4 = new Person('Olga', {}, '-32');
+//var person3 = new Person('', '');

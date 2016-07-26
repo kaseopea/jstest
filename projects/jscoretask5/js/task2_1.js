@@ -9,67 +9,62 @@ var domElement = {
     // init method
     init: function(element) {
         var regex = new RegExp('^[a-z0-9]+$', 'i');
-        var _this = this;
-        var innerContents = '';
+        if ((typeof element === 'string') && regex.test(element)) {
 
-        if (_.isString(element) && regex.test(element)) {
-
-            _this.type = element;
-            _this.attributes = [];
+            this.type = element;
+            this.attributes = [];
 
             //innerHTML
             Object.defineProperty(this, 'innerHTML', {
                 get: function () {
                     var elAtts, elContent, childrenInnerHTML = '';
-
-                    // Prepare Attributes
-                    if (_this.attributes.length) {
-                        elAtts = _this.attributes.reduce(function(a, b) {
+                    if (this.attributes.length) {
+                        elAtts = this.attributes.reduce(function(a, b) {
                             return a + ' ' + b.name + '="' + b.value + '"'
                         }, '');
                     } else {
                         elAtts = '';
                     }
 
-                    // Prepare children
-                    // todo: Make children work with content
-                    // todo: Children can be nested on output?
+                    if (this.children.length) {
 
-                    if (_this.children.length) {
-                        _.forEach(_this.children, function (item) {
+                        //todo: case we have a children
+                        console.log(this.children);
+                        _.forEach(this.children, function (item) {
                             childrenInnerHTML += item.innerHTML;
                         });
                         elContent = childrenInnerHTML;
+
                     } else {
-                        elContent = _this.content;
+                        elContent = this.content;
                     }
 
-                    // output
-                    return '<' + _this.type + elAtts +'>' + elContent + '</' + _this.type + '>';
+                    return '<' + this.type + elAtts +'>' + elContent + '</' + this.type + '>';
                 }
             });
 
             // Contents property
+            this.innerContents = '';
             Object.defineProperty(this, 'content', {
-               set: function (value) {
+                set: function (value) {
                     if (!this.children.length) {
-                        innerContents = value;
+                        this.innerContents = value;
                     } else {
-                        console.error('You can\'t add content to element that have children');
+                        throw new Error('You can\'t add content to element that have children');
                     }
-               },
+                },
                 get: function() {
-                    return innerContents;
+                    return this.innerContents;
                 }
             });
 
-            // Parent/Child stuff;
+            // Parent / Child stuff;
             this.children = [];
             this.parent = null;
 
             return this;
         } else {
-            console.error('Not a valid domElement');
+            throw new Error('Not a valid domElement');
         }
     },
 
@@ -81,8 +76,8 @@ var domElement = {
         childEl.parent = parentEl;
         parentEl.children.push(childEl);
 
-        // todo: check if it is enough
-
+        //console.log(childEl);
+        //console.log(parentEl);
         return this;
     },
 
@@ -91,17 +86,26 @@ var domElement = {
         var attr, attrNameRegex, attrValueRegex;
         var _this = this;
 
+        /*console.group('domElement ' + _this.type);
+         console.log('Object:', this);
+         console.log('Type: ' + _this.type);
+         console.log(typeof _this.attributes);
+         console.groupEnd();*/
+
         //assume that if we have a type property - it's valid
         if (_this.type) {
 
             // todo: more tests for attrValueRegex
+
             attrNameRegex = /^[a-z0-9-]+$/i;
             attrValueRegex = /^[a-z0-9:#%_;\.\/\'"()-\s\[\]]+$/ig;
             if (_.isString(attrName) && _.isString(attrValue) && attrNameRegex.test(attrName) && attrValueRegex.test(attrValue)) {
+
                 attr = {
                     name: attrName,
                     value: attrValue
                 };
+
                 _this.attributes.push(attr);
                 _this.attributes.sort( function(a,b) {
                     return a.name > b.name;
@@ -110,11 +114,11 @@ var domElement = {
                 return _this;
 
             } else {
-                console.error('Invalid params for attribute');
+                throw new Error('Invalid params for attribute');
             }
 
         } else {
-            console.error('You should define element type first to add attr');
+            throw new Error('You should define element type first to add attr');
         }
 
     },
@@ -124,13 +128,25 @@ var domElement = {
         var _this = this;
         var i, attrItem;
 
+        //console.log("attr name: " + attr);
+        //console.log(_this.attributes);
+        //_.forEach(_this.attributes, function(attr) {
+        //    console.log('>>>>>>>  ' + attr.name);
+        //});
+
         for (i = 0; i < _this.attributes.length; i++) {
             attrItem = _this.attributes[i];
+            //console.log(attrItem);
             if (attrItem.name === attr) {
+                //console.log('FOUND: ' + attrItem.name + ' - INDEX: ' + i);
                 _this.attributes.splice(i, 1);
                 continue;
             }
         }
+        //console.log('\n\n');
+        //_.forEach(_this.attributes, function(attr) {
+        //    console.log('>>>>>>>  ' + attr.name);
+        //});
 
         return _this;
     }
@@ -138,9 +154,57 @@ var domElement = {
 
 
 
+var div = Object.create(domElement)
+    .init('div')
+    .addAttribute('data-style', 'font-size: 42px')
+    .addAttribute('class', 'panel')
+    .addAttribute('id', 'panelCool');
 
-// Tests
-console.log('Task 2 ***********************************\n\n');
+div.content = 'Cool content';
+console.log(div.innerHTML);
+//console.log(div.attributes);
+//_.forEach(div.attributes, function(attr) {
+//    console.log('> ' + attr.name);
+//});
+
+
+console.log('\n\n');
+
+var span = Object.create(domElement)
+    .init('span')
+    .addAttribute('style', 'color: #fff')
+    .addAttribute('class', 'span-panel')
+    .addAttribute('id', 'alert')
+    .removeAttribute('style');
+
+//console.log(span.attributes);
+//
+//_.forEach(span.attributes, function(attr) {
+//    console.log('> ' + attr.name);
+//});
+
+
+
+/*
+ var meta = Object.create(domElement)
+ .init('meta')
+ .addAttribute('charset', 'utf-8')
+ .appendChild(span);
+
+ var span = Object.create(domElement)
+ .init('span')
+ .addAttribute('class', 'testspan_for_head')
+ .appendChild(span);
+
+ var head = Object.create(domElement)
+ .init('head')
+ .appendChild(meta)
+ .appendChild(span);
+
+ console.log('\n\n');
+ console.log('This is head from the bottom: ', head);
+ console.log(head.innerHTML);*/
+
 
 var meta = Object.create(domElement)
     .init('meta')
@@ -154,7 +218,7 @@ var div = Object.create(domElement)
     .init('div')
     .addAttribute('style', 'font-size: 42px; color: #fff');
 
-div.content = 'Hello, mad-mad world!';
+div.content = 'Hello, world!';
 
 var body = Object.create(domElement)
     .init('body')
@@ -168,19 +232,5 @@ var root = Object.create(domElement)
     .appendChild(body);
 
 console.log(root.innerHTML);
-//document.write(root.innerHTML);
 
-// todo: more test cases
-var divInner = Object.create(domElement)
-    .init('div')
-    .addAttribute('style', 'border: 5px solid green');
-var div = Object.create(domElement)
-    .init('div')
-    .addAttribute('style', 'border: 10px solid red;')
-    .appendChild(divInner);
-
-var root = Object.create(domElement)
-    .init('div')
-    .appendChild(div);
-console.log(root.innerHTML);
 document.write(root.innerHTML);
